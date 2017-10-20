@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="pt-br" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+
+	<title>Rede Contas</title>
+	<link rel="icon" href="image/favicon.ico" type="image/x-icon">
+	
+	<!-- CSS -->
+	<!-- bootstrap -->
+	<!-- 
+	 <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+	 -->
+	 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	 <!-- jqueryui -->
+	<link rel="stylesheet" href="lib/jquery-ui/jquery-ui.min.css"/>
+	<link href="css/contas.css" rel="stylesheet">
+	
+	
+	<!-- 
+		<link href="lib/ngtable/ng-table.min.css" rel="stylesheet">
+		 -->
+	<!-- CSS -->
+	
+	<!-- JAVASCRIPT -->
+	<!-- jquery -->
+	<script type="text/javascript" src="lib/jquery/jquery.js"></script>
+	<script type="text/javascript" src="lib/jquery-ui/jquery-ui.js"></script>
+	
+	
+	<!-- datepicker-pt-BR -->
+	<script type="text/javascript">
+	jQuery(function($){
+        $.datepicker.regional['pt-BR'] = {
+                closeText: 'Fechar',
+                prevText: '&#x3c;Anterior',
+                nextText: 'Pr&oacute;ximo&#x3e;',
+                currentText: 'Hoje',
+                monthNames: ['Janeiro','Fevereiro','Mar&ccedil;o','Abril','Maio','Junho',
+                'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun',
+                'Jul','Ago','Set','Out','Nov','Dez'],
+                dayNames: ['Domingo','Segunda-feira','Ter&ccedil;a-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sabado'],
+                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'],
+                dayNamesMin: ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'],
+                weekHeader: 'Sm',
+                dateFormat: 'dd/mm/yy',
+                firstDay: 0,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''};
+	   $.datepicker.setDefaults($.datepicker.regional['pt-BR']);
+	});
+	
+	</script>
+		
+	<!-- angular -->
+	<!-- 
+		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
+		 -->
+		 
+	<script src="lib/angular/angular.js"></script>
+	<script src="lib/angular-ui/mask/mask.min.js"></script>
+	<script src="lib/angular-ui/date/date.js"></script>
+	<script src="lib/angular-ui/router/angular-ui-router.js"></script>
+	<script src="lib/angular/angular-locale_pt-br.js"></script>
+	<script src="lib/angular/angular-route.min.js"></script>
+	<script src="lib/angular-translate/angular-translate.min.js"></script>
+	<script src="js/contasApp.js"></script>
+	<script src="js/contasRoute.js"></script>  
+	<script src="js/htmlComponentsService.js"></script>
+	<script src="js/inputFormatService.js"></script>
+	<script src="js/contasService.js"></script>
+	<script src="js/contasControler.js"></script>
+	<script src="js/contaPagaControler.js"></script>
+	<script src="js/contaPagaService.js"></script>
+	<script src="js/menuControler.js"></script>
+	<script src="js/intenationalization/resourcebundle.js"></script>
+	
+	<script data-require="ui-bootstrap@*" data-semver="1.3.2" src="https://cdn.rawgit.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-tpls-1.3.2.js"></script>
+	
+	<!-- jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- bootstrap -->
+	<script src="lib/bootstrap/bootstrap.min.js"></script>
+	
+	
+	<!--
+		<script src="lib/ngtable/ng-table.min.js"></script> 
+		 -->
+	
+	<!-- JAVASCRIPT -->
+
+</head>
+<body ng-app="contasApp">
+	<div id="head" ng-include="'view/template/head.html'"></div>
+	<div id="content" ng-view ></div>
+	<div id="footer" ng-include="'view/template/footer.html'"></div>
+</body>
+</html>

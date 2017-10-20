@@ -1,0 +1,194 @@
+<head>
+<meta charset="utf-8"/>
+<style type="text/css">
+</style>
+</head>
+
+	<h1>{{ 'TITULO_A_PAGAR' | translate }}</h1>
+	<!-- Filtro -->
+	<div style="widht: 99%">
+		<hr>
+		<h2>{{ 'FILTRO' | translate }}</h2>
+		
+		<form class="form-horizontal" >
+			
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="id">{{ 'ID' | translate }}:</label>
+				<div class="col-sm-2">
+					<input type="text" class="form-control" id="id" ng-model="filtro.id">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="filtro.filial.id">{{ 'ID_FILIAL' | translate }}:</label>
+				<div class="col-sm-2">
+					<input type="text" class="form-control" id="filtro.filial.id" ng-model="filtro.filial.id">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="idFilial">{{ 'CIDADE_FILIAL' | translate }}:</label>
+				<div class="col-sm-2">
+					<input type="text" class="form-control" id="idFilial" ng-model="filtro.filial.cidade">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="valor">{{ 'VALOR' | translate }}:</label>
+				<div class="col-sm-2">
+					<input type="text" class="form-control" id="valor" ng-model="filtro.valor">
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<hr>
+	<div class="botoes">		
+		<button type="button" class="btn btn-primary" ng-click="cadastrar()" >{{ 'CADASTRAR' | translate }}</button>
+	</div>
+	
+	<div class="tnavegator" style="margin-bottom: 12px;">
+		<p>{{'TAMPAGINA' | translate}}</p>
+
+	    <select ng-change="changeItemPage()"
+	      ng-options="option.label for option in select.availableOptions track by option.valor"
+	      ng-model="select.selectedOption">
+	    </select>
+
+	</div>
+		
+	<table border="1" class="table table-striped table-bordered table-hover tabela" >
+		<tr>
+			<th>
+				<button ng-click="sortBy('x.id')">{{ 'ID' | translate }}</button>
+       			<span class="sortorder" ng-show="propertyName === 'x.id'" ng-class="{reverse: reverse}"></span>
+       		</th>
+			 <th>
+				<button ng-click="sortBy('x.filial.id')">{{ 'ID_FILIAL' | translate }}</button>
+       			<span class="sortorder" ng-show="propertyName === 'x.filial.id'" ng-class="{reverse: reverse}"></span>
+       		</th>
+			 <th>
+				<button ng-click="sortBy('x.status.nome')">{{ 'STATUS' | translate }}</button>
+       			<span class="sortorder" ng-show="propertyName === 'x.status.nome'" ng-class="{reverse: reverse}"></span>
+       		</th>
+			 <th>
+				<button ng-click="sortBy('x.filial.cidade')">{{ 'CIDADE_FILIAL' | translate }}</button>
+       			<span class="sortorder" ng-show="propertyName === 'x.filial.cidade'" ng-class="{reverse: reverse}"></span>
+       		</th>
+       		<!-- 
+       		<th>
+				<button ng-click="sortBy('dt_baixa')">{{ 'DT_BAIXA' | translate }}</button>
+       			<span class="sortorder" ng-show="propertyName === 'dt_baixa'" ng-class="{reverse: reverse}"></span>
+       		</th>
+			 <th>
+				<button ng-click="sortBy('saldo_ant_tot')">{{ 'SALDO_TOT_ANT' | translate }}</button>
+       			<span class="sortorder" ng-show="propertyName === 'saldo_ant_tot'" ng-class="{reverse: reverse}"></span>
+       		</th>
+       		<th>
+				<button ng-click="sortBy('saldo_post_tot')">{{ 'SALDO_TOT_POST' | translate }}</button>
+       			<span class="sortorder" ng-show="propertyName === 'saldo_post_tot'" ng-class="{reverse: reverse}"></span>
+       		</th>
+       		 -->
+       		<th>
+				<button ng-click="sortBy('valor')">{{ 'VALOR' | translate }}</button>
+       			<span class="sortorder" ng-show="propertyName === 'valor'" ng-class="{reverse: reverse}"></span>
+       		</th>
+			 <th></th>
+		</tr>
+
+		<tr ng-repeat="c in lsConta | filter:filtro |orderBy:propertyName:reverse ">
+			<td class="col-lg-1">{{ c.id }}</td>
+			<td class="col-lg-1">{{ c.filial.id }}</td>
+			<td class="col-lg-2">{{ c.status.nome }}</td>
+			<td class="col-lg-1">{{ c.filial.cidade }}</td>
+			<!-- 
+			<td class="col-lg-2">{{ c.dtBaixa | date : "dd/MM/y"}}</td>
+			<td class="col-lg-2">{{ c.saldoAntTot }}</td>
+			<td class="col-lg-2">{{ c.saldoPostTot }}</td>
+			 -->
+			<td class="col-lg-2">{{ c.valor }}</td>
+			<td class="col-lg-1 tcenter">
+
+		        <a href="#" class="btn btn-danger btn-lg" title="{{ 'DELETAR' | translate }}" data-toggle="modal" data-target="#myModal"  ng-click="modal($event,c.id)">
+		          <span class="glyphicon glyphicon-trash"></span>
+		        </a>
+		        <a href="#" class="btn btn-primary btn-lg" title="{{ 'EDITAR' | translate }}" ng-click="eventoEditar($event, c)">
+		          <span class="glyphicon glyphicon-pencil"></span>
+		        </a>
+		        <a href="#" class="btn btn-primary btn-lg" title="{{ 'PAGAR' | translate }}" ng-click="pagar(c)">
+		          <span class="glyphicon glyphicon-usd"></span>
+		        </a>			        
+			</td>
+		</tr>
+	</table>
+	<div class="tnavegator">
+		<uib-pagination 
+			total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage" ng-change="pageChanged((currentPage-1)*itemsPerPage,((currentPage-1)*itemsPerPage)+itemsPerPage)"
+			previous-text="{{ 'ANTERIOR' | translate }}" next-text="{{ 'PROXIMO' | translate }}"
+			first-text="{{ 'PRIMEIRO' | translate }}" last-text="{{ 'ULTIMO' | translate }}"
+			boundary-links="true">
+		</uib-pagination>
+	</div>		
+	
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+	  <div class="modal-dialog">
+	  
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">{{ 'CONFIRMACAO' | translate }}</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>{{ 'MSG_DELETA_CONTA' | translate }}</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'NAO' | translate }}</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="deletar()">{{ 'SIM' | translate }}</button>
+	      </div>
+	    </div>
+	    
+	  </div>
+	</div>
+
+			
+	<!-- FORMULARIO -->
+	<div ng-show="exibeFormulario">
+		<hr>
+		<h2>{{ 'TITULO_FORMULARIO_CONTA' | translate }}:</h2>
+
+		<form class="form-horizontal">
+			<input type="hidden" ng-model="conta.id">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="fidfilial">{{ 'FILIAL' | translate }} :</label>
+				
+				<div class="col-sm-2">
+				<select ng-change="changeItemPage()" class="form-control" id="fidfilial"
+			      ng-options="option.label for option in selectFilial.availableOptions track by option.valor"
+			      ng-model="selectFilial.selectedOption">
+			    </select>
+					<!-- <input type="text" class="form-control" id="ffilial" ng-model="conta.idFilial" > -->
+					<p ng-show="msgFilial" class="alert alert-danger alert-dismissable">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+						{{msgFilial}}
+					</p>	
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="valor">{{ 'VALOR' | translate }} !:</label>
+				<div class="col-sm-2">
+					<input type="text" class="form-control" id="valor" ng-model="conta.valor">
+					<p ng-show="msgValor" class="alert alert-danger alert-dismissable">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+						{{msgValor}}
+					</p>
+				</div>
+			</div>
+			
+			
+			<div class="botoes">
+				<button type="reset" class="btn btn-default">{{ 'LIMPAR' | translate }}</button>
+				<button type="button" class="btn btn-danger" ng-click="fechar()">{{ 'FECHAR' | translate }}</button>
+				<button type="button" class="btn btn-primary" ng-click="salvar()">{{ 'SALVAR' | translate }}</button>
+			</div>
+
+		</form>
+	</div>

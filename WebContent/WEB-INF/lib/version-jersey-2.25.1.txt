@@ -1,0 +1,9 @@
+https://jersey.java.net/download.html
+
+Configuração
+http://stackoverflow.com/questions/18086218/java-lang-classnotfoundexception-com-sun-jersey-spi-container-servlet-servletco
+http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/
+
+https://docs.oracle.com/cd/E24329_01/web.1211/e24983/configure.htm#RESTF182
+
+https://jersey.java.net/documentation/latest/user-guide.html#d0e3572

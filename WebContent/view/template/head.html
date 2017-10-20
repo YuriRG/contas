@@ -1,0 +1,39 @@
+<head>
+<meta charset="utf-8"/>
+
+<script>
+$( "[name=item]" ).click(function( event ) {
+  $("[name=item]").attr('class', '');
+  
+  $( this ).attr('class','active');
+});
+</script>
+</head>
+
+<nav class="navbar navbar-default" ng-controller="menuCtrl">
+	<div class="container-fluid" id="bs-example-navbar-collapse-1">
+		 <ul class="nav navbar-nav" style="width: 100%">
+	        <li class="">
+	        	<img ng-src="image/credit_card.png" alt="logo" style="width:40px;heigth:40px">
+	        </li>
+	        <li class="active" name="item">
+	        	<a href="#/contas">{{ 'CONTAS' | translate }} </a>
+	        </li>
+	        <li class="" name="item">
+	        	<a href="#/historico">{{ 'HISTORICO' | translate }} </a>
+	        </li>
+	        
+	        <li class="dropdown" style="float:right" >
+	          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ 'LINGUA' | translate }}<span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a ng-click="changeLanguage('br')">{{'PTBR' | translate}}</a></li>
+	            <li><a ng-click="changeLanguage('us')">{{'US' | translate}}</a></li>
+	          </ul>
+	        </li>
+	    </ul>
+		<div class="" style="float:right;">
+			<label class="" >{{ 'SALDO_TOTAL' | translate }}:</label>
+			<label class="" >{{ saldoTotal | currency}}</label>
+		</div>
+	</div>
+</nav>

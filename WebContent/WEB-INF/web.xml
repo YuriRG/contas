@@ -3,10 +3,36 @@
   <display-name>contas</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <context-param> 
+	  <param-name>com.sun.faces.writeStateAtFormEnd</param-name> 
+	  <param-value>false</param-value> 
+  </context-param>
+  <!-- SERVLET -->	
+  <!-- JAXRS -->
+  <servlet>
+	  <servlet-name>javax.ws.rs.core.Application</servlet-name>
+	  <async-supported>true</async-supported>
+  </servlet>
+  <servlet-mapping>
+	  <servlet-name>javax.ws.rs.core.Application</servlet-name>
+	  <url-pattern>/rest/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>default</servlet-name>
+    <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>    
+    <init-param>
+      <param-name>debug</param-name>
+      <param-value>0</param-value>
+    </init-param>
+    <init-param>
+      <param-name>listings</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+
 </web-app>

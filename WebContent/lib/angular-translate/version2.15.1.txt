@@ -1,0 +1,1 @@
+https://angular-translate.github.io/

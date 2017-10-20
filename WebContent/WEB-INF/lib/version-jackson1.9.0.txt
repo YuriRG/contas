@@ -1,0 +1,1 @@
+https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl/1.9.0
