@@ -4,44 +4,56 @@ app.controller("menuCtrl", function($scope, $filter, $location, $uibModal, $http
 	$scope.saldoTotal = {};
 	
 	
-	ContasService.saldoTotal(function onSuccess(response) {
-		  // Handle success
-		  var data = response.data;
-		  var status = response.status;
-		  var statusText = response.statusText;
-		  var headers = response.headers;
-		  var config = response.config;
-		  
-		  $scope.saldoTotal = data.saldoTotal;	  
-	});
+	// set interval
+	var tid = setInterval(mycode, 2000);
+	
+	function mycode() {
+		ContasService.saldoTotal(function onSuccess(response) {
+			  // Handle success
+			  var data = response.data;
+			  var status = response.status;
+			  var statusText = response.statusText;
+			  var headers = response.headers;
+			  var config = response.config;
+			  
+			  $scope.saldoTotal = data.saldoTotal;	  
+		});
+	}
+	
+	function abortTimer() { // to be called when you want to stop the timer
+	  clearInterval(tid);
+	}
+	
+	
+
 	
     // ================= Listener Saldo total    	
 
-    /**
-     * Recebe mensagem via broadcast
-     */	
-    var handleCallback = function (msg) {
-    	
-        $scope.$apply(function () {
-            var json = JSON.parse( msg.data);
-            
-            $scope.saldoTotal = json.saldoTotal;
-            $("#saldotot").html(json.saldoTotal);
-            console.log("SALDO TOT: "+json.saldoTotal);
-        });
-    }
-	
-    try {
-    var saldoTotalListener = new EventSource('/contas/rest/broadcast/saldototal/listener');
-    saldoTotalListener.addEventListener('message', handleCallback, false);
-    
-    }catch(err) {
-      console.log("===============LISTENER=============")
-	  console.log("name: "+err.name); // ReferenceError
-	  console.log("message: "+err.message); // lalala is not defined
-	  console.log("stack: "+err.stack); // ReferenceError: lalala is not defined at ...
-
-	}
+//    /**
+//     * Recebe mensagem via broadcast
+//     */	
+//    var handleCallback = function (msg) {
+//    	
+//        $scope.$apply(function () {
+//            var json = JSON.parse( msg.data);
+//            
+//            $scope.saldoTotal = json.saldoTotal;
+//            $("#saldotot").html(json.saldoTotal);
+//            console.log("SALDO TOT: "+json.saldoTotal);
+//        });
+//    }
+//	
+//    try {
+//    var saldoTotalListener = new EventSource('/contas/rest/broadcast/saldototal/listener');
+//    saldoTotalListener.addEventListener('message', handleCallback, false);
+//    
+//    }catch(err) {
+//      console.log("===============LISTENER=============")
+//	  console.log("name: "+err.name); // ReferenceError
+//	  console.log("message: "+err.message); // lalala is not defined
+//	  console.log("stack: "+err.stack); // ReferenceError: lalala is not defined at ...
+//
+//	}
 	
 	/**
 	 * Mudando Controler
